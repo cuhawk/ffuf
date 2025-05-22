@@ -127,8 +127,6 @@ func NewConfig(ctx context.Context, cancel context.CancelFunc) Config {
 	conf.StopOnErrors = false
 	conf.Timeout = 10
 	conf.Url = ""
-	conf.PausedStatusCode = 403
-	conf.PauseInterval = 5 * time.Minute
 	conf.Verbose = false
 	conf.Wordlists = []string{}
 	conf.Http2 = false
