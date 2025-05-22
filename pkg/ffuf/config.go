@@ -2,7 +2,6 @@ package ffuf
 
 import (
 	"context"
-	"time"
 )
 
 type Config struct {
