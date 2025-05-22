@@ -125,6 +125,12 @@ func (r *SimpleRunner) Execute(req *ffuf.Request) (ffuf.Response, error) {
 		return ffuf.Response{}, err
 	}
 
+	if r.config.PauseStatus > 0 && httpresp.StatusCode == r.config.PauseStatus {
+		fmt.Printf("⚠️  received HTTP %d — pausing for %s\n",
+		r.config.PauseStatus, r.config.PauseDuration)
+		time.Sleep(r.config.PauseDuration)
+	}
+
 	// set default User-Agent header if not present
 	if _, ok := req.Headers["User-Agent"]; !ok {
 		req.Headers["User-Agent"] = fmt.Sprintf("%s v%s", "Fuzz Faster U Fool", ffuf.Version())
