@@ -2,6 +2,7 @@ package ffuf
 
 import (
 	"context"
+	"time"
 )
 
 type Config struct {
@@ -61,6 +62,8 @@ type Config struct {
 	StopOnAll                 bool                  `json:"stop_all"`
 	StopOnErrors              bool                  `json:"stop_errors"`
 	Threads                   int                   `json:"threads"`
+	PauseStatusCode           int                   `json:"pausestatuscode"`
+        PauseInterval             time.Duration         `json:"timeduration"`
 	Timeout                   int                   `json:"timeout"`
 	Url                       string                `json:"url"`
 	Verbose                   bool                  `json:"verbose"`
@@ -124,6 +127,8 @@ func NewConfig(ctx context.Context, cancel context.CancelFunc) Config {
 	conf.StopOnErrors = false
 	conf.Timeout = 10
 	conf.Url = ""
+	conf.PausedStatusCode = 403
+	conf.PauseInterval = 5 * time.Minute
 	conf.Verbose = false
 	conf.Wordlists = []string{}
 	conf.Http2 = false
