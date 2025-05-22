@@ -238,6 +238,8 @@ func main() {
 
 	// Set up Config struct
 	conf, err := ffuf.ConfigFromOptions(opts, ctx, cancel)
+	conf.PauseStatus = opts.General.PauseStatus
+	conf.PauseDuration = opts.General.PauseDuration
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Encountered error(s): %s\n", err)
 		Usage()
