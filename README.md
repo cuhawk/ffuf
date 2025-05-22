@@ -300,6 +300,8 @@ job from the beginning.
   <img width="250" src="_img/ffuf_waving_250.png">
 </p>
 
+added pause
+
 ## License
 
 ffuf is released under MIT license. See [LICENSE](https://github.com/ffuf/ffuf/blob/master/LICENSE).
