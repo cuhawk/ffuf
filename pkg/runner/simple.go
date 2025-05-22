@@ -156,16 +156,14 @@ func (r *SimpleRunner) Execute(req *ffuf.Request) (ffuf.Response, error) {
 		return ffuf.Response{}, err
 	}
 
+	if r.config.PauseDuration > 0 && httpresp.StatusCode == r.config.PauseStatus {
+		time.Sleep(time.Duration(r.config.PauseDuration) * time.Minute)
+	}
+
 	req.Timestamp = start
 
 	resp := ffuf.NewResponse(httpresp, req)
 	defer httpresp.Body.Close()
-
-	if r.config.PauseStatus > 0 && httpresp.StatusCode == r.config.PauseStatus {
-		fmt.Printf("⚠️  received HTTP %d — pausing for %s\n",
-		r.config.PauseStatus, r.config.PauseDuration)
-		time.Sleep(r.config.PauseDuration)
-	}
 
 	// Check if we should download the resource or not
 	size, err := strconv.Atoi(httpresp.Header.Get("Content-Length"))
