@@ -62,8 +62,8 @@ type Config struct {
 	StopOnAll                 bool                  `json:"stop_all"`
 	StopOnErrors              bool                  `json:"stop_errors"`
 	Threads                   int                   `json:"threads"`
-	PauseStatus   		  int           	`mapstructure:"pause-status"`
-        PauseDuration 		  time.Duration 	`mapstructure:"pause-duration"`
+	PauseStatus   		  int           	`json:"pause_status"`
+        PauseDuration 		  int 			`json:"pause_duration"`
 	Timeout                   int                   `json:"timeout"`
 	Url                       string                `json:"url"`
 	Verbose                   bool                  `json:"verbose"`
@@ -121,6 +121,8 @@ func NewConfig(ctx context.Context, cancel context.CancelFunc) Config {
 	conf.RequestProto = "https"
 	conf.SNI = ""
 	conf.ScraperFile = ""
+	conf.PauseStatus = 403
+	conf.PauseDuration = 5
 	conf.Scrapers = "all"
 	conf.StopOn403 = false
 	conf.StopOnAll = false
